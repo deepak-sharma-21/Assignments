@@ -1,10 +1,11 @@
 const express = require("express");
-const dateIdentifier = require("../middleware/dateIdentifier.middleware");
+const dateIdentifier = require("../utils/dateIdentifier");
 let router = express.Router();
 
-router.get('/', dateIdentifier, (req, res) => {
+router.get('/', (req, res) => {
 
     if (req.query.q) {
+        dateIdentifier(req,res)
         if (res.isValidDate) {
             res.status(200).json({ "month": res.month, "lastDay": res.lastDay, "isLeapYear": res.isLeapYear })
         }
